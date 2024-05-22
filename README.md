@@ -88,3 +88,5 @@ curl -X POST http://localhost:3000/battles/save -H "Content-Type: application/js
 Edit Battle
 curl -X PUT http://localhost:3000/battles/1 -H "Content-Type: application/json" -d '{"winner": "Misty"}'
 
+Get Battle
+curl -X GET http://localhost:3000/battles/1

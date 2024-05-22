@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Battle } from './battle.entity';
@@ -42,5 +42,13 @@ export class BattlesService {
     battle.winner = winner;
 
     return this.battleRepository.save(battle);
+  }
+
+  async getBattleById(id: number): Promise<Battle> {
+    const battle = await this.battleRepository.findOne({ where: { id } });
+    if (!battle) {
+      throw new NotFoundException('Battle not found');
+    }
+    return battle;
   }
 }

@@ -12,7 +12,7 @@ export class PokemonsService {
   }
 
   async getMultiplePokemonCards(): Promise<{ name: string; damage: string }[]> {
-    const response = await PokemonTCG.getAllCards({ });
+    const response = await PokemonTCG.findCardsByQueries({page:1, pageSize: 30 });
     const index = getRandomNumber();
     return response.map(card => {
       const damageInfo = card.attacks ? card.attacks.map(attack => attack.damage).join(', ') : 'No damage';

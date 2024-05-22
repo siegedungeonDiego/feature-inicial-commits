@@ -1,4 +1,4 @@
-import { Controller, Post, Put, Body, Param } from '@nestjs/common';
+import { Controller, Post, Put, Body, Param, ParseIntPipe, Get } from '@nestjs/common';
 import { BattlesService } from './battles.service';
 import { CreateBattleDto } from './dto/create-battle.dto';
 import { Battle } from './battle.entity';
@@ -20,5 +20,10 @@ export class BattlesController {
   @Put(':id')
   async editBattle(@Param('id') id: number, @Body('winner') winner: string): Promise<Battle> {
     return this.battlesService.updateBattle(id, winner);
+  }
+
+  @Get(':id')
+  async getBattleById(@Param('id', ParseIntPipe) id: number): Promise<Battle> {
+    return this.battlesService.getBattleById(id);
   }
 }
